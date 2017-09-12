@@ -13,9 +13,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberEntered: UITextField!
     @IBOutlet weak var answerLabel: UILabel!
     
-    var isPrime = true
-    var number: Int?
-    var i = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,35 +24,47 @@ class ViewController: UIViewController {
     
     @IBAction func buttonTapped(_ sender: Any) {
         
-        if let number = Int(numberEntered.text!) {
+        if let userEntered = numberEntered.text {
             
-            if number == 1 {
+            let userEntered = Int(userEntered)
+            
+            if let number = userEntered {
                 
-                isPrime = false
-                answerLabel.text = "\(number) is not prime"
+                var isPrime = true
                 
-            } else {
+                if number == 1 {
+                    
+                    isPrime =  false
+                }
+                
+                var i = 2
                 
                 while i < number {
                     
                     if number % i == 0 {
                         
-                        isPrime = false
-                        answerLabel.text = "\(number) is not prime"
-                        
-                    } else {
-                        
-                        answerLabel.text = "\(number) is prime!"
+                        isPrime =  false
                         
                     }
                     
+                    i += 1
                     
                 }
                 
-                i += 1
+                if isPrime {
+                    answerLabel.text = "\(number) is prime!"
+                } else {
+                    answerLabel.text = "\(number) is not prime."
+                }
+                
+            } else {
+                answerLabel.text = "Please enter a positive whole number"
             }
+            
+        
         }
     }
-    
 }
+        
+
 
